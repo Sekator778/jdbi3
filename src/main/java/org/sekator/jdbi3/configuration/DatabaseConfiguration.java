@@ -6,6 +6,7 @@ import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.postgres.PostgresPlugin;
 import org.jdbi.v3.spring5.SpringConnectionFactory;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import org.sekator.jdbi3.repository.RewardGroupRepository;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,5 +42,10 @@ public class DatabaseConfiguration {
         jdbi.installPlugin(new PostgresPlugin());
 
         return jdbi;
+    }
+
+    @Bean
+    public RewardGroupRepository rewardGroupRepository(Jdbi jdbi) {
+        return jdbi.onDemand(RewardGroupRepository.class);
     }
 }
